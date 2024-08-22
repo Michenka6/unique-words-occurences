@@ -24,13 +24,16 @@ main :: proc() {
     solutions.sanitize_input(string(source), &input)
 
     // run_solution(&input, .First)
-    // run_solution(&input, .Second)
+    run_solution(&input, .Second)
     run_solution(&input, .Third)
-    // run_solution(&input, .Fourth)
-    // run_solution(&input, .Fifth)
+    run_solution(&input, .Fourth)
+    run_solution(&input, .Fifth)
 }
 
-NUMBER_OF_RUNS :: 10
+NUMBER_OF_RUNS :: 1
+
+RED :: "\e[31m"
+NC :: "\e[0m"
 
 run_solution :: proc(source: solutions.Sanitized_Input, sn: Solution_Number) {
     // when ODIN_DEBUG {
@@ -96,29 +99,32 @@ run_solution :: proc(source: solutions.Sanitized_Input, sn: Solution_Number) {
     solutions.soa_array_trie_delete(soa_array_trie)
     total /= NUMBER_OF_RUNS
 
+    fmt.print('\t')
     switch sn {
     case .First:
-        fmt.printf("Dynamic Array time(ms) average: %v\n", total)
+        fmt.printf("Dynamic Array  - average time(ms): %s%v%s\n", RED, total, NC)
     case .Second:
-        fmt.printf("In-built map time(ms) average: %v\n", total)
+        fmt.printf("In-built map   - average time(ms): %s%v%s\n", RED, total, NC)
     case .Third:
-        fmt.printf("Naive trie time(ms) average: %v\n", total)
+        fmt.printf("Naive trie     - average time(ms): %s%v%s\n", RED, total, NC)
     case .Fourth:
-        fmt.printf("Array trie time(ms) average: %v\n", total)
+        fmt.printf("Array trie     - average time(ms): %s%v%s\n", RED, total, NC)
     case .Fifth:
-        fmt.printf("SOA-Array trie time(ms) average: %v\n", total)
+        fmt.printf("SOA-Array trie - average time(ms): %s%v%s\n", RED, total, NC)
     }
 
-    // switch sn {
-    // case .First:
-    //     solutions.solution_1_write_to_file(source, "occurence-tables/solution-1.json")
-    // case .Second:
-    //     solutions.solution_2_write_to_file(source, "occurence-tables/solution-2.json")
-    // case .Third:
-    //     solutions.solution_3_write_to_file(source, "occurence-tables/solution-3.json")
-    // case .Fourth:
-    //     solutions.solution_4_write_to_file(source, "occurence-tables/solution-4.json")
-    // case .Fifth:
-    //     solutions.solution_5_write_to_file(source, "occurence-tables/solution-5.json")
-    // }
+    fmt.print('\t')
+    switch sn {
+    case .First:
+        solutions.solution_1_write_to_file(source, "occurence-tables/solution-1.json")
+    case .Second:
+        solutions.solution_2_write_to_file(source, "occurence-tables/solution-2.json")
+    case .Third:
+        solutions.solution_3_write_to_file(source, "occurence-tables/solution-3.json")
+    case .Fourth:
+        solutions.solution_4_write_to_file(source, "occurence-tables/solution-4.json")
+    case .Fifth:
+        solutions.solution_5_write_to_file(source, "occurence-tables/solution-5.json")
+    }
+    fmt.println()
 }

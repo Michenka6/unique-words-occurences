@@ -7,7 +7,6 @@ import "core:strings"
 
 Naive_Trie :: struct {
     children: [26]^Naive_Trie,
-    // is_leaf:  bool,
     n:        int,
 }
 
@@ -30,7 +29,6 @@ naive_trie_insert :: proc(root: ^Naive_Trie, word: string) {
         current_node = current_node.children[index]
     }
     current_node.n += 1
-    // current_node.is_leaf = true
 }
 
 naive_trie_delete :: proc(node: ^Naive_Trie) {
@@ -44,7 +42,6 @@ naive_trie_delete :: proc(node: ^Naive_Trie) {
 naive_trie_get_words :: proc(node: ^Naive_Trie, acc: ^[dynamic]Entry) {
     dfs :: proc(node: ^Naive_Trie, buffer: string, acc: ^[dynamic]Entry) {
         if node == nil {return}
-        // if node.is_leaf {
         if node.n > 0 {
             append_elem(acc, Entry{buffer, node.n})
         }

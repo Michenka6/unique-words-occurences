@@ -4,7 +4,7 @@ import "core:fmt"
 import "core:strings"
 import "core:unicode"
 
-MAX_TRIE_NODES :: 1_000
+MAX_TRIE_NODES :: 150_000
 
 Sanitized_Input :: #type ^[dynamic]string
 
